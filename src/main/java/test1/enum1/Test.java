@@ -1,4 +1,4 @@
-package test2;
+package test1.enum1;
 
 /**
  * Created by chin on 5/17/16.
@@ -6,8 +6,14 @@ package test2;
 public class Test {
 
     public static void main(String[] args) {
+        String name = Color.getName(1);
+        System.out.println(name);
+
+
         for (Color c: Color.values()) {
-            c.print();
+
+
+            System.out.println(c);
         }
     }
 }

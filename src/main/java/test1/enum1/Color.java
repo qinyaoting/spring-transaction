@@ -1,4 +1,4 @@
-package test;
+package test1.enum1;
 
 /**
  * Created by chin on 5/17/16.

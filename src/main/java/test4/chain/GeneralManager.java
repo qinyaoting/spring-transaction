@@ -1,23 +1,21 @@
-package test4;
+package test4.chain;
 
 /**
  * Created by chin on 5/23/16.
  */
-public class DeptManager extends Handler {
+public class GeneralManager extends Handler {
     @Override
-    public String handleFeeRequest( double fee) {
+    public String handleFeeRequest(double fee) {
 
 
         String str = "";
-        if (fee < 1000) {
-            System.out.println("部门经理批准......");
-            str = "部门经理批准";
+        if (fee >= 1000) {
+            str = "成功：总经理同意";
         } else {
             if (getSuccessor() != null) {
                 return getSuccessor().handleFeeRequest(fee);
             }
         }
-
         return str;
     }
 }

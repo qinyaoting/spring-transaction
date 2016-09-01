@@ -1,4 +1,4 @@
-package test3;
+package test3.chain;
 
 /**
  * Created by chin on 5/23/16.
