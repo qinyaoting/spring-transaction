@@ -35,7 +35,14 @@ public class RemoteTest {
             Channel channel = session.openChannel("exec");
 
             //((ChannelExec)channel).setCommand("cmd.exe /c \"echo %cd%\"");
-            ((ChannelExec)channel).setCommand("cmd.exe /c \"mkdir 222\"");
+            //((ChannelExec)channel).setCommand("cmd.exe /c \"bat.exe apache-flume-1.6.0-bin\\bin\\flume-win.bat\"");
+            //ssh WINDOWS_SERVER "cmd /C D:\PATH_TO_BAT\BATCHFILE.BAT"
+            //((ChannelExec)channel).setCommand("cmd.exe /c \"test.bat\"");
+            //((ChannelExec)channel).setCommand("bat.exe /c  C:\\Users\\chin\\apache-flume-1.6.0-bin\\bin\\flume-win.bat");
+            //String cmds = (String) "cmd /C powershell C:/Documents and Settings/vvenkata/My         Documents/Hello.ps1";
+            ((ChannelExec)channel).setCommand("powershell.exe /C   apache-flume-1.6.0-bin\\bin\\flume-win.ps1");
+
+
             channel.connect();
             InputStream outputstream_from_the_channel = channel.getInputStream();
             BufferedReader reader = new BufferedReader(new InputStreamReader(outputstream_from_the_channel));
