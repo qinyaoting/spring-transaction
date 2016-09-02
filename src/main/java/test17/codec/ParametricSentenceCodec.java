@@ -29,6 +29,8 @@ public class ParametricSentenceCodec<T extends AbstractNmeaObject> extends Abstr
         }
     }
 
+    // 5.父类的工作是,截断字符串----> 给对象赋值---->通知观察者
+
     @Override
     public void decode(String content) {
         Preconditions.checkNotNull(content);
