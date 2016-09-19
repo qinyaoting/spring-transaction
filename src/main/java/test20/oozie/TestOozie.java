@@ -10,6 +10,13 @@ import java.util.Properties;
  */
 public class TestOozie {
 
+    /**
+     * 注意:
+     *  1.--hbase-create-table,在高版本的hbase无效,在0.98上,该参数可以起作用,
+     *  2. oracle导入到hbase中,如果表中没有主键,需要增加参数--hbase-row-key xx
+     *  3. 如果表有主键,可以不加--hbase-row-key参数
+     */
+
 
     public static void main(String[] args) throws Exception {
         //String oozieUrl = "http://master:11000/oozie";
