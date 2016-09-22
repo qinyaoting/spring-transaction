@@ -8,7 +8,7 @@ public class Test {
     public static void main(String[] args) throws CustomExcpetion {
 
 
-        HttpClientUtil client = new HttpClientUtil("conf");
+        HttpClientUtil client = new HttpClientUtil("conf", "mr");
         String jobid = client.call();
     }
 }

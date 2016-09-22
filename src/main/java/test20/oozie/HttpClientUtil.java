@@ -8,8 +8,8 @@ import java.net.HttpURLConnection;
 public class HttpClientUtil extends AbstractClientCallable<String> {
 
 
-    protected HttpClientUtil(String conf) {
-        super(conf);
+    protected HttpClientUtil(String conf, String typeName) {
+        super(conf, typeName);
     }
 
     @Override

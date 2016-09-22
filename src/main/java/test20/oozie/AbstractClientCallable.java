@@ -9,11 +9,12 @@ import java.util.concurrent.Callable;
  */
 public abstract class AbstractClientCallable<T> implements Callable<T> {
 
-
+    private String typeName;
     private String conf;
 
-    protected AbstractClientCallable(String conf) {
+    protected AbstractClientCallable(String conf, String typeName) {
         this.conf = conf;
+        this.typeName = typeName;
     }
 
     public T call() throws CustomExcpetion {
