@@ -1,0 +1,52 @@
+111
+SLF4J: Found binding in [jar:file:/xbdp/hbase-1.2.2/lib/hbase-observer-2.0.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/xbdp/hbase-1.2.2/lib/hbase-observer-2.1.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J: Actual binding is of type [org.slf4j.impl.Log4jLoggerFactory]
+16/09/27 10:36:35 INFO manager.OracleManager: Time zone has been set to GMT
+16/09/27 10:36:35 INFO manager.SqlManager: Executing SQL statement: SELECT t.* FROM ESB_ATOMIC_SERVICE t WHERE 1=0
+16/09/27 10:36:35 INFO orm.CompilationManager: HADOOP_MAPRED_HOME is /xbdp/hadoop-2.6.4
+Note: /tmp/sqoop-xdata/compile/8659c5a60530edfc27a8a405b11d9820/ESB_ATOMIC_SERVICE.java uses or overrides a deprecated API
+.
+Note: Recompile with -Xlint:deprecation for details.
+16/09/27 10:36:37 INFO orm.CompilationManager: Writing jar file: /tmp/sqoop-xdata/compile/8659c5a60530edfc27a8a405b11d9820
+/ESB_ATOMIC_SERVICE.jar
+16/09/27 10:36:37 INFO manager.OracleManager: Time zone has been set to GMT
+16/09/27 10:36:37 INFO manager.OracleManager: Time zone has been set to GMT
+16/09/27 10:36:37 INFO mapreduce.ImportJobBase: Beginning import of ESB_ATOMIC_SERVICE
+16/09/27 10:36:38 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java
+ classes where applicable
+16/09/27 10:36:38 INFO Configuration.deprecation: mapred.jar is deprecated. Instead, use mapreduce.job.jar
+16/09/27 10:36:38 INFO manager.OracleManager: Time zone has been set to GMT
+16/09/27 10:36:38 INFO Configuration.deprecation: mapred.map.tasks is deprecated. Instead, use mapreduce.job.maps
+16/09/27 10:36:40 INFO db.DBInputFormat: Using read commited transaction isolation
+16/09/27 10:36:40 INFO mapreduce.JobSubmitter: number of splits:1
+16/09/27 10:36:40 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1474537299530_1176
+16/09/27 10:36:41 INFO impl.YarnClientImpl: Submitted application application_1474537299530_1176
+16/09/27 10:36:41 INFO mapreduce.Job: The url to track the job: http://bdas00:23188/proxy/application_1474537299530_1176/
+16/09/27 10:36:41 INFO mapreduce.Job: Running job: job_1474537299530_1176
+16/09/27 10:36:47 INFO mapreduce.Job: Job job_1474537299530_1176 running in uber mode : false
+16/09/27 10:36:47 INFO mapreduce.Job:  map 0% reduce 0%
+16/09/27 10:36:55 INFO mapreduce.Job:  map 100% reduce 0%
+16/09/27 10:36:56 INFO mapreduce.Job: Job job_1474537299530_1176 completed successfully
+16/09/27 10:36:56 INFO mapreduce.Job: Counters: 30
+222
+222
+222
+222
+222
+222
+222
+222
+222
+222
+222
+222
+222
+222
+222
+222
+222
+222
+16/09/27 10:36:56 INFO mapreduce.Job: Job job_1474537299530_1176 completed successfully
+222
