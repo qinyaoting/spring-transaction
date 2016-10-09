@@ -8,14 +8,15 @@ public class Client {
     public static void main(String[] args) {
 
 
-        //先要组装责任链
-        Handler h1 = new GeneralManager();
-        Handler h2 = new DeptManager();
-        Handler h3 = new ProjectManager();
+        //先要组装责任链,只有一个人能处理请求
+
+        Handler h1 = new GeneralManager();      //总经理       大于1000
+        Handler h2 = new DeptManager();         //部门经理      小于1000,大于500
+        Handler h3 = new ProjectManager();      //项目经理      小于500
         h3.setSuccessor(h2);
         h2.setSuccessor(h1);
 
-        //开始测试
+        //开始测试,参数传给h3开始处理请求
         String test1 = h3.handleFeeRequest(300);
         System.out.println("test1 = " + test1);
         String test2 = h3.handleFeeRequest(300);
