@@ -16,25 +16,24 @@ public class PushActor extends UntypedActor {
 
     // 10w个邮件内容,初始化到队列里,用actor,取出,发送, 最好有个组的概念, 怎么知道全发完了?
 
-    public static Props props(LinkedBlockingDeque q) {
+    public static Props props() {
         return Props.create(new Creator<PushActor>() {
             @Override
             public PushActor create() throws Exception {
-                return new PushActor(q);
+                return new PushActor();
             }
         });
     }
 
     private LinkedBlockingDeque queue;
 
-    public PushActor(LinkedBlockingDeque q) {
-        this.queue = q;
-        start();
-    }
-
     @Override
     public void onReceive(Object message) throws Exception {
-
+        //System.out.println(message.getClass().getName());
+        if (message instanceof  LinkedBlockingDeque) {
+            queue = (LinkedBlockingDeque) message;
+            start();
+        }
     }
 
     ExecutorService threadPool = Executors.newFixedThreadPool(5);
@@ -59,11 +58,11 @@ public class PushActor extends UntypedActor {
             try {
                 while (true) {
                     //System.out.println(Thread.currentThread().getName() + "===========");
-                    Mail mail = (Mail)queue.take();
+                    MailTask mail = (MailTask)queue.take();
 
-                    Job job = new Job(mail);
-                    final ActorSelection sendEmailActor = actor.getContext().actorSelection("../sendEmailActor");
-                    sendEmailActor.tell(job, actor.getSender());
+                    //Job job = new Job(mail);
+                    //final ActorSelection sendEmailActor = actor.getContext().actorSelection("../sendEmailActor");
+                    //sendEmailActor.tell(job, actor.getSender());
                     //System.out.println(Thread.currentThread().getName() + "-------------"); //5个线程很快就发完了
                 }
 

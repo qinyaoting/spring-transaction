@@ -4,6 +4,9 @@ import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import com.typesafe.config.Config;
 
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingDeque;
 
 /**
@@ -13,33 +16,52 @@ public class Test {
 
 
 
-    static LinkedBlockingDeque queue = new LinkedBlockingDeque<>();
+    static LinkedBlockingDeque<AbstractTask> mailQueue = new LinkedBlockingDeque<AbstractTask>();
 
-    static String groupId = "grp01";
     static String title = "big apple ";
     static String content = "You will get a lot of apple, ";
     static String targetAddr = "abc@xxx.com";
     static String sourceAddr = "xyz@zzz.com";
 
+
     public static void main(String[] args) throws InterruptedException {
 
 
         for (int i = 0; i < 100000; i++) {
-            queue.add(new Mail(groupId, title+i,content+i,targetAddr, sourceAddr));
+            mailQueue.add(new MailTask(title+i,content+i,targetAddr, sourceAddr));
         }
-        System.out.println(queue.size());
+
+        Job job = new Job("job01",mailQueue);
+        System.out.println("Job init finished. " + job.getJobId() + " queue:" + mailQueue.size());
 
 
-        Thread.sleep(30000);
+        Thread.sleep(10000);
 
         Config config = com.typesafe.config.ConfigFactory.parseString("akka.loglevel = DEBUG \n akka.actor.debug.lifecycle = on");
         ActorSystem system = ActorSystem.create("Test", config);
-        final ActorRef pushActor = system.actorOf(PushActor.props(queue), "pushActor");
+
+
         final ActorRef sendEmailActor = system.actorOf(SendEmailActor.props(), "sendEmailActor");
         final ActorRef sumActor = system.actorOf(SumActor.props(), "sumActor");
 
+        sumActor.tell(job, null);
 
 
+        for (int i = 0; i < 10; i++) {
 
+            threadPool.submit(new Callable<Object>() {
+                @Override
+                public Object call() throws Exception {
+                    while (true) {
+                        sendEmailActor.tell(mailQueue.take(), null);
+                    }
+                }
+            });
+        }
     }
+
+
+    static ExecutorService threadPool = Executors.newFixedThreadPool(10);
+
+
 }

@@ -28,23 +28,23 @@ public class SendEmailActor extends UntypedActor {
 
     @Override
     public void onReceive(Object message) throws Exception {
-        if (message instanceof Job) {
+        if (message instanceof AbstractTask) {
 
-            Job job = (Job)message;
-            //System.out.println("receive: ==== " + job.toString());
+            AbstractTask task = (AbstractTask)message;
+            //System.out.println("receive: ==== " + task.toString());
             mockSleep();
             String st = getRandomStatus();
-            job.setStatus(st);
-            //System.out.println("job done: ==== " + job.toString());
+            task.setStatus(st);
+            //System.out.println("job done: ==== " + task.toString());
 
             final ActorSelection sumActor = this.getContext().actorSelection("../sumActor");
-            sumActor.tell(job, this.getSender());
+            sumActor.tell(task, this.getSender());
 
         }
     }
 
     public void mockSleep() throws InterruptedException {
-        int max = 100;
+        int max = 2000;
         int min = 0;
         int s = random.nextInt(max)%(max-min+1) + min;
         //System.out.println("sleep:" + s);

@@ -2,13 +2,21 @@ package test33.mail;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import java.util.concurrent.LinkedBlockingDeque;
 
 /**
  * Created by chin on 11/16/16.
  */
 public class Job {
 
-    private Mail mail;
+    private String jobId;
+
+    public String getJobId() {
+        return jobId;
+    }
+
+    private LinkedBlockingDeque<AbstractTask> tasks;
 
     private String ctime;
     private String etime;
@@ -17,17 +25,10 @@ public class Job {
 
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-    public Job(Mail mail) {
-        this.mail = mail;
+    public Job(String jobId, LinkedBlockingDeque<AbstractTask> tasks) {
+        this.jobId = jobId;
+        this.tasks = tasks;
         ctime = sdf.format(new Date());
-    }
-
-    public String getEtime() {
-        return etime;
-    }
-
-    public void setEtime(String etime) {
-        this.etime = etime;
     }
 
     public String getStatus() {
@@ -41,12 +42,10 @@ public class Job {
 
     @Override
     public String toString() {
-        return "Job{" +
-                "mail=" + mail +
-                ", ctime='" + ctime + '\'' +
-                ", etime='" + etime + '\'' +
-                ", status='" + status + '\'' +
-                ", sdf=" + sdf +
-                '}';
+        return "";
+    }
+
+    public int getTaskSize() {
+        return tasks.size();
     }
 }

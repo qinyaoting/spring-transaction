@@ -4,6 +4,8 @@ import akka.actor.Props;
 import akka.actor.UntypedActor;
 import akka.japi.Creator;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,28 +23,49 @@ public class SumActor extends UntypedActor {
             }
         });
     }
-
-    static int max = 100000;
-    Map<String,Integer> map = new HashMap<String,Integer>();
+    Map<String,Integer> jobMap = new HashMap<>();
+    static int max = 0;
+    static String ctime = "";;
+    Map<String,Integer> taskStatusCounter = new HashMap<String,Integer>();
 
     @Override
     public void onReceive(Object message) throws Exception {
+
         if (message instanceof Job) {
-            --max;
+
             Job job = (Job)message;
-            String st = job.getStatus();
-            if (map.get(st) != null) {
-                int val = map.get(st).intValue();
-                map.put(st,++val);
+            jobMap.put(job.getJobId(),job.getTaskSize());
+            max = job.getTaskSize();
+            System.out.println(max);
+            ctime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+        }
+
+        else if (message instanceof AbstractTask) {
+            --max;
+            AbstractTask task = (AbstractTask)message;
+            String st = task.getStatus();
+            if (taskStatusCounter.get(st) != null) {
+                int val = taskStatusCounter.get(st).intValue();
+                taskStatusCounter.put(st, ++val);
             } else {
-                map.put(st, 1);
+                taskStatusCounter.put(st, 1);
             }
 
             if (max % 1000 == 0) {
-                for (String key : map.keySet()) {
-                    System.out.println(key + " --> " + map.get(key));
+                System.out.println("==================================");
+                for (String key : taskStatusCounter.keySet()) {
+                    System.out.println(key + " --> " + taskStatusCounter.get(key));
                 }
             }
+
+
+            if (max == 0) {
+
+                System.out.println("all task done");
+                System.out.println("ctime:" + ctime);
+                System.out.println("etime:" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+            }
+
         }
     }
 }
