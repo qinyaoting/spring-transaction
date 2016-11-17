@@ -67,5 +67,8 @@ public class SumActor extends UntypedActor {
             }
 
         }
+        /*
+        1000个http 每100s
+         */
     }
 }

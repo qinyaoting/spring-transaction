@@ -32,7 +32,8 @@ public class SendEmailActor extends UntypedActor {
 
             AbstractTask task = (AbstractTask)message;
             //System.out.println("receive: ==== " + task.toString());
-            mockSleep();
+            //mockSleep();
+            callHttp();
             String st = getRandomStatus();
             task.setStatus(st);
             //System.out.println("job done: ==== " + task.toString());
@@ -43,8 +44,22 @@ public class SendEmailActor extends UntypedActor {
         }
     }
 
+
+    public void callHttp() {
+        try {
+            String response = scala.io.Source.fromURL("http://xw.qq.com/m/news/index.htm","UTF-8").getLines().mkString("\n");
+            //System.out.println("response:"+ response);
+        } catch (Exception e) {
+            //System.out.println("err:"+e.getMessage());
+        }
+    }
+
+    /**
+     * 不能使用线程休眠, actor是共享线程的, 让线程休眠影响效率
+     * @throws InterruptedException
+     */
     public void mockSleep() throws InterruptedException {
-        int max = 2000;
+        int max = 10;
         int min = 0;
         int s = random.nextInt(max)%(max-min+1) + min;
         //System.out.println("sleep:" + s);
