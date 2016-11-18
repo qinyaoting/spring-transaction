@@ -36,7 +36,7 @@ public class SumActor extends UntypedActor {
             Job job = (Job)message;
             jobMap.put(job.getJobId(),job.getTaskSize());
             max = job.getTaskSize();
-            System.out.println(max);
+            System.out.println("SumActor received: " + max);
             ctime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
         }
 

@@ -38,7 +38,7 @@ public class SendEmailActor extends UntypedActor {
             task.setStatus(st);
             //System.out.println("job done: ==== " + task.toString());
 
-            final ActorSelection sumActor = this.getContext().actorSelection("../sumActor");
+            ActorSelection sumActor = this.getContext().actorSelection("../sumActor");
             sumActor.tell(task, this.getSender());
 
         }
@@ -48,9 +48,9 @@ public class SendEmailActor extends UntypedActor {
     public void callHttp() {
         try {
             String response = scala.io.Source.fromURL("http://xw.qq.com/m/news/index.htm","UTF-8").getLines().mkString("\n");
-            //System.out.println("response:"+ response);
+            //System.out.println("response:"+ response.substring(0,12));
         } catch (Exception e) {
-            //System.out.println("err:"+e.getMessage());
+            System.out.println("err:"+e.getMessage());
         }
     }
 

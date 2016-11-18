@@ -42,7 +42,7 @@ public class Roulette {
             result[i] = index;
         }
         for (int i=0; i<n; i++){
-            System.out.println("counter["+i+"]="+counter[i]);
+            //System.out.println("counter["+i+"]="+counter[i]);
 
         }
         /*for (int i=0; i<n_select; i++){

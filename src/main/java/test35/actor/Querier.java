@@ -30,7 +30,7 @@ public class Querier extends UntypedActor {
         else {
             for(String base: engines) {         //2
                 String url = base + question;
-                ActorRef fetcher = this.getContext().actorOf(Props.create(UrlFetcher.class), "fetcher-"+base.hashCode());
+                ActorRef fetcher = this.getContext().actorOf(Props.create(UrlFetcher.class), "fetcher-"+base.hashCode());       //???创建了多个fetcher?
                 Message m = new Message(url);
                 fetcher.tell(m, self());        //3
             }

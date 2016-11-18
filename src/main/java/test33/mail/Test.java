@@ -4,6 +4,7 @@ import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import com.typesafe.config.Config;
 
+import java.util.UUID;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -35,16 +36,17 @@ public class Test {
         System.out.println("Job init finished. " + job.getJobId() + " queue:" + mailQueue.size());
 
 
-        Thread.sleep(10000);
+        //Thread.sleep(10000);
 
-        Config config = com.typesafe.config.ConfigFactory.parseString("akka.loglevel = DEBUG \n akka.actor.debug.lifecycle = on");
-        ActorSystem system = ActorSystem.create("Test", config);
+        //Config config = com.typesafe.config.ConfigFactory.parseString("akka.loglevel = DEBUG \n akka.actor.debug.lifecycle = on");
+        //ActorSystem system = ActorSystem.create("Test", config);
+        ActorSystem system = ActorSystem.create("Test");
 
 
-        final ActorRef sendEmailActor = system.actorOf(SendEmailActor.props(), "sendEmailActor");
-        final ActorRef sumActor = system.actorOf(SumActor.props(), "sumActor");
 
-        sumActor.tell(job, null);
+        ActorRef sumActor = system.actorOf(SumActor.props(), "sumActor");
+
+        sumActor.tell(job, ActorRef.noSender());
 
 
         for (int i = 0; i < 10; i++) {
@@ -53,7 +55,10 @@ public class Test {
                 @Override
                 public Object call() throws Exception {
                     while (true) {
-                        sendEmailActor.tell(mailQueue.take(), null);
+
+                        AbstractTask task = mailQueue.take();
+                        ActorRef sendEmailActor = system.actorOf(SendEmailActor.props(), "sendEmailActor"+ UUID.randomUUID().toString());
+                        sendEmailActor.tell(task, ActorRef.noSender());
                     }
                 }
             });
