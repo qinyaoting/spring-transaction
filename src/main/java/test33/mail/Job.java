@@ -18,6 +18,14 @@ public class Job {
 
     private LinkedBlockingDeque<AbstractTask> tasks;
 
+    public LinkedBlockingDeque<AbstractTask> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(LinkedBlockingDeque<AbstractTask> tasks) {
+        this.tasks = tasks;
+    }
+
     private String ctime;
     private String etime;
 

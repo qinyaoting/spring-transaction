@@ -2,7 +2,9 @@ package test33.mail;
 
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
+import akka.actor.Props;
 import com.typesafe.config.Config;
+import test36.actor.WordCounterActor;
 
 import java.util.UUID;
 import java.util.concurrent.Callable;
@@ -28,28 +30,29 @@ public class Test {
     public static void main(String[] args) throws InterruptedException {
 
 
-        for (int i = 0; i < 100000; i++) {
+        /*for (int i = 0; i < 100000; i++) {
             mailQueue.add(new MailTask(title+i,content+i,targetAddr, sourceAddr));
         }
 
         Job job = new Job("job01",mailQueue);
-        System.out.println("Job init finished. " + job.getJobId() + " queue:" + mailQueue.size());
+        System.out.println("Job init finished. " + job.getJobId() + " queue:" + mailQueue.size());*/
 
 
         //Thread.sleep(10000);
 
         //Config config = com.typesafe.config.ConfigFactory.parseString("akka.loglevel = DEBUG \n akka.actor.debug.lifecycle = on");
         //ActorSystem system = ActorSystem.create("Test", config);
+
+
         ActorSystem system = ActorSystem.create("Test");
+        ActorRef sumActor = system.actorOf(Props.create(SumActor.class), "sumActor");
+        sumActor.tell("start", ActorRef.noSender());
 
 
 
-        ActorRef sumActor = system.actorOf(SumActor.props(), "sumActor");
-
-        sumActor.tell(job, ActorRef.noSender());
 
 
-        for (int i = 0; i < 10; i++) {
+        /*for (int i = 0; i < 10; i++) {
 
             threadPool.submit(new Callable<Object>() {
                 @Override
@@ -62,11 +65,11 @@ public class Test {
                     }
                 }
             });
-        }
+        }*/
     }
 
 
-    static ExecutorService threadPool = Executors.newFixedThreadPool(10);
+    //static ExecutorService threadPool = Executors.newFixedThreadPool(10);
 
 
 }

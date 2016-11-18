@@ -13,7 +13,7 @@ import java.util.Random;
  */
 public class SendEmailActor extends UntypedActor {
 
-    Random random = new Random();
+    /*Random random = new Random();
     Roulette roulette = new Roulette();
 
     public static Props props() {
@@ -25,21 +25,33 @@ public class SendEmailActor extends UntypedActor {
         });
     }
 
+    public SendEmailActor() {
+    }*/
 
     @Override
     public void onReceive(Object message) throws Exception {
-        if (message instanceof AbstractTask) {
+        /*if (message instanceof AbstractTask) {
 
             AbstractTask task = (AbstractTask)message;
             //System.out.println("receive: ==== " + task.toString());
             //mockSleep();
-            callHttp();
+            //callHttp();
             String st = getRandomStatus();
             task.setStatus(st);
             //System.out.println("job done: ==== " + task.toString());
 
-            ActorSelection sumActor = this.getContext().actorSelection("../sumActor");
+            ActorSelection sumActor = this.getContext().actorSelection("akka://Test/user/sumActor");
             sumActor.tell(task, this.getSender());
+
+        } else */
+
+        if (message instanceof String) {
+
+            String line = (String) message;
+            int len = line.split(" ").length;
+            callHttp();
+            ActorSelection sumActor = this.getContext().actorSelection("akka://Test/user/sumActor");
+            sumActor.tell(len, this.getSelf());
 
         }
     }
@@ -57,7 +69,7 @@ public class SendEmailActor extends UntypedActor {
     /**
      * 不能使用线程休眠, actor是共享线程的, 让线程休眠影响效率
      * @throws InterruptedException
-     */
+    /*
     public void mockSleep() throws InterruptedException {
         int max = 10;
         int min = 0;
@@ -70,7 +82,7 @@ public class SendEmailActor extends UntypedActor {
      * 随机的状态, FAILED 1%            SUCCESS 97%             EXCEPTION 1%              TIMEOUT 1%
      * @return
      */
-    public String getRandomStatus() {
+    /*public String getRandomStatus() {
         int flag= roulette.getRandom();
         String msg = "";
         switch (flag) {
@@ -89,5 +101,5 @@ public class SendEmailActor extends UntypedActor {
 
         }
         return msg;
-    }
+    }*/
 }
