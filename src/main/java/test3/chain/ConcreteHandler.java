@@ -8,10 +8,10 @@ public class ConcreteHandler extends Handler {
     public void handleRequest() {
 
         if (getSuccessor() != null) {
-            System.out.println("放过请求");
+            System.out.println(this.getClass().toString() + "\t放过请求");
             getSuccessor().handleRequest();
         } else {
-            System.out.println("处理请求....");
+            System.out.println(this.getClass().toString() + "\t处理请求....");
         }
 
 

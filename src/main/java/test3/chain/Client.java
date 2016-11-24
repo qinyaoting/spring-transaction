@@ -6,6 +6,10 @@ package test3.chain;
 public class Client {
 
     public static void main(String[] args) {
+
+
+        // 如果有继任者, 就由继任者处理
+
         Handler handler1 = new ConcreteHandler();
         Handler handler2 = new ConcreteHandler();
         Handler handler3 = new ConcreteHandler();
