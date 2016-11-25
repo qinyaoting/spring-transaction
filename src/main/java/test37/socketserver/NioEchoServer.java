@@ -40,10 +40,12 @@ public class NioEchoServer {
         SelectionKey sk;
         ByteBuffer bb;
 
-        HandleMsg(ByteBuffer bb, SelectionKey sk) {
+
+        public HandleMsg(SelectionKey sk, ByteBuffer bb) {
             this.bb = bb;
             this.sk = sk;
         }
+
 
         @Override
         public void run() {
@@ -62,11 +64,17 @@ public class NioEchoServer {
     private static AbstractSelector selector;
 
     private static void startServer() throws Exception {
-        selector = SelectorProvider.provider().openSelector();
+
+        // 1 获得socketchannel
         ServerSocketChannel scc = ServerSocketChannel.open();
         scc.configureBlocking(false);
-        InetSocketAddress isa = new InetSocketAddress(8000);
+        // 2 获得 InetSocketAddress
+        InetSocketAddress isa = new InetSocketAddress(8899);
+        // 3 创建socket,绑定地址
         scc.socket().bind(isa);
+        // 4 selector
+        selector = SelectorProvider.provider().openSelector();
+        // 5 注册selector到socketchannel
         SelectionKey acceptKey = scc.register(selector, SelectionKey.OP_ACCEPT);
         for (; ; ) {
             selector.select();
@@ -90,8 +98,8 @@ public class NioEchoServer {
                 } else if (sk.isValid() && sk.isWritable()) {
                     doWrite(sk);
                     e = System.currentTimeMillis();
-                    time_start.remove(((SocketChannel)sk.channel()).socket());
-                    System.out.println("spend:"+(System.currentTimeMillis()-e));
+                    long b = time_start.remove(((SocketChannel)sk.channel()).socket());
+                    System.out.println("spend:"+(e-b) + "ms");
                 }
             }
         }
@@ -133,7 +141,7 @@ public class NioEchoServer {
         }
 
         bb.flip();
-        //tp.execute(new HandleMsg(sk,bb));
+        tp.execute(new HandleMsg(sk,bb));
 
     }
 
@@ -145,6 +153,25 @@ public class NioEchoServer {
 
     private static void doWrite(SelectionKey sk) {
 
+        SocketChannel channel = (SocketChannel)sk.channel();
+        EchoClient echoClient = (EchoClient) sk.attachment();
+        LinkedList<ByteBuffer> outq = echoClient.getOutputQueue();
+        ByteBuffer bb = outq.getLast();
+        try {
+            int len = channel.write(bb);
+            if (len == -1) {
+                disconnect(sk);
+                return;
+            }
+            if (bb.remaining() == 0) {
+                outq.removeLast();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            disconnect(sk);
+        }
 
+        if (outq.size() == 0)
+            sk.interestOps(SelectionKey.OP_READ);
     }
 }
