@@ -7,12 +7,12 @@ import test39.filter2.Filter;
  */
 public class MsgProcessor {
     private String msg;
-    private FilterChain chain;
+    private Filter chain;
 
     public MsgProcessor() {
     }
 
-    public MsgProcessor(String msg,FilterChain chain){
+    public MsgProcessor(String msg,Filter chain){
         this.msg = msg;
         this.chain = chain;
     }

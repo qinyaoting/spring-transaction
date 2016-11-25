@@ -10,13 +10,16 @@ import java.util.List;
  */
 public class FilterChain implements Filter {
 
+
+    // 链 里有个list
     public List<Filter> filters= new ArrayList<Filter>();
 
     public FilterChain addFilter(Filter f){
         filters.add(f);
-        return this;
+        return this;        // 返回自身
     }
 
+    // 链 的doFilter方法,是遍历list,
     @Override
     public String doFilter(String str) {
         String r = str;
