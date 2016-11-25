@@ -30,7 +30,38 @@ class Task implements Runnable {
      * @throws Exception
      */
     private void handleSocket() throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+
+        BufferedReader is = null;
+        PrintWriter os = null;
+
+        try {
+            is = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            os = new PrintWriter(socket.getOutputStream(), true);
+            String inputLine = null;
+            long b = System.currentTimeMillis();
+            while ((inputLine = is.readLine()) != null) {
+                System.out.println("=====server received msg:" + inputLine);
+                os.println(inputLine);
+            }
+            long e = System.currentTimeMillis();
+            System.out.println("=====spend" + (e-b)+"ms");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (is != null) is.close();
+                if (os != null) os.close();
+                if (socket != null) socket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+
+
+
+        /*BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         StringBuilder sb = new StringBuilder();
         String temp = null;
         int index;
@@ -46,7 +77,7 @@ class Task implements Runnable {
             sb.append(temp);
         }
         //System.out.println("from client: " + sb);
-        /*Reader reader = new InputStreamReader(socket.getInputStream());
+        *//*Reader reader = new InputStreamReader(socket.getInputStream());
         char chars[] = new char[64];
         int len;
         StringBuilder sb = new StringBuilder();
@@ -59,7 +90,7 @@ class Task implements Runnable {
                 break;
             }
             sb.append(temp);
-        }*/
+        }*//*
         long e = System.currentTimeMillis();
         System.out.printf("spend:%s\n",(e-b));
 
@@ -70,6 +101,6 @@ class Task implements Runnable {
         writer.flush();
         writer.close();
         br.close();
-        socket.close();
+        socket.close();*/
     }
 }

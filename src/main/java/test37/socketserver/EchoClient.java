@@ -15,8 +15,8 @@ public class EchoClient implements Runnable {
     public void run() {
 
         Socket client = null;
-        Writer writer = null;
-        BufferedReader br = null;
+        PrintWriter writer = null;
+        BufferedReader reader = null;
         try {
             //为了简单起见，所有的异常都直接往外抛
             String host = "127.0.0.1";  //要连接的服务端IP地址
@@ -24,25 +24,27 @@ public class EchoClient implements Runnable {
             //与服务端建立连接
             client = new Socket(host, port);
             //建立连接后就可以往服务端写数据了
-            writer = new OutputStreamWriter(client.getOutputStream());
+            writer = new PrintWriter(client.getOutputStream(),true);
             System.out.println("client start write.");
-            writer.write("Hello Server.1");
+            writer.print("Hello Server.1");
             LockSupport.parkNanos(sleep_time);
-            writer.write("Hello Server.2");
+            writer.print("Hello Server.2");
             LockSupport.parkNanos(sleep_time);
-            writer.write("Hello Server.3");
+            writer.print("Hello Server.3");
             LockSupport.parkNanos(sleep_time);
-            writer.write("Hello Server.4");
+            writer.print("Hello Server.4");
             LockSupport.parkNanos(sleep_time);
-            writer.write("Hello Server.5");
+            writer.print("Hello Server.5");
             LockSupport.parkNanos(sleep_time);
-            writer.write("Hello Server.6");
+            writer.print("Hello Server.6");
             LockSupport.parkNanos(sleep_time);
-            writer.write("eof");
+            writer.println();
             writer.flush();
             System.out.println("client flush.");
             //写完以后进行读操作
-            br = new BufferedReader(new InputStreamReader(client.getInputStream()));
+            reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
+            System.out.println("from server: " + reader.readLine());
+            /*br = new BufferedReader(new InputStreamReader(client.getInputStream()));
             StringBuffer sb = new StringBuffer();
             String temp;
             int index;
@@ -53,14 +55,15 @@ public class EchoClient implements Runnable {
                 }
                 sb.append(temp);
             }
-            System.out.println("from server: " + sb);
+            System.out.println("from server: " + sb);*/
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
+            System.out.println("client finally method.");
             try {
                 if (writer != null) writer.close();
-                if (br != null)  br.close();
+                if (reader != null)  reader.close();
                 if (client != null) client.close();
             } catch (IOException e) {
                 e.printStackTrace();
