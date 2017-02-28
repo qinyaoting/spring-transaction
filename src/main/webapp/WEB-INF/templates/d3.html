@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head lang="en">
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
-    <title>Test page</title>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>d3.chart.layout.hierarchy.tree.radial</title>
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
     <script src="https://rawgit.com/misoproject/d3.chart/master/d3.chart.min.js"></script>
     <script src="https://rawgit.com/bansaghi/d3.chart.layout.hierarchy/master/d3.chart.layout.hierarchy.js"></script>
-
     <style>
         html {
             display: table;
@@ -40,12 +39,13 @@
     </style>
 </head>
 <body>
+
 <div id="vis"></div>
 
 <script>
     (function() {
 
-        d3.json("http://localhost:8088/js/d3-3.json", function(error, json) {
+        d3.json("https://rawgit.com/bansaghi/d3.chart.layout.hierarchy/master/example/data/flare.json", function(error, json) {
 
             var tree = d3.select("#vis").append("svg")
 
@@ -65,7 +65,5 @@
         });
     }());
 </script>
-
 </body>
-
 </html>

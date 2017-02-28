@@ -51,7 +51,9 @@
         <property name="dataSource" ref="datasource"/>
     </bean>
 
+
+    <!--
     <bean id = "bookShopDao" class="com.xyz.BookShopDao" />
-    <bean id = "bookShopService" class="com.xyz.BookShopService" />
+    <bean id = "bookShopService" class="com.xyz.BookShopService" />-->
 
 </beans>
