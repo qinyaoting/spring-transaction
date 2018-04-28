@@ -30,7 +30,7 @@ public class MainClass {
 
 
 
-        final File sourceFile = new File("/home/chin/company/conf/os/CentOS-6.6-x86_64-bin-DVD1.iso");
+        /*final File sourceFile = new File("/home/chin/company/conf/os/CentOS-6.6-x86_64-bin-DVD1.iso");
         final File targetFile = new File("/home/chin/company/conf/os/CentOS-6.6-x86_64-bin-DVD1====.iso");
         try
         {
@@ -41,6 +41,6 @@ public class MainClass {
         catch (IOException fileIoEx)
         {
             System.out.println("ERROR trying to copy file '"+fileIoEx.toString());
-        }
+        }*/
     }
 }

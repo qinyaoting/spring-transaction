@@ -1,4 +1,4 @@
-package test28;
+package test28.queue;
 
 import java.io.*;
 import java.util.concurrent.ExecutorService;
