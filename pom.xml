@@ -324,6 +324,11 @@
             <artifactId>ojdbc6</artifactId>
             <version>11.2.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.jcabi</groupId>
+            <artifactId>jcabi-aspects</artifactId>
+            <version>0.22.6</version>
+        </dependency>
 
     </dependencies>
 
