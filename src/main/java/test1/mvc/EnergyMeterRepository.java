@@ -1,6 +1,6 @@
-package org.pavlov.springapp.mvc.javascriptex1.repository;
+package test1.mvc;
 
-import org.pavlov.springapp.mvc.javascriptex1.model.EnergyMeter;
+import test1.mvc.EnergyMeter;
 
 /**
  * Created by Vasiliy on 13.04.2015.

@@ -1,4 +1,4 @@
-package com.xyz;
+package test2.transaction;
 
 import java.util.List;
 public interface Cashier {

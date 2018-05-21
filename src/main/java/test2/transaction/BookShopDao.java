@@ -1,4 +1,4 @@
-package com.xyz;
+package test2.transaction;
 
 public interface BookShopDao {
     //根据书号获取书的单价

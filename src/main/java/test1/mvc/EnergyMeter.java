@@ -1,4 +1,4 @@
-package org.pavlov.springapp.mvc.javascriptex1.model;
+package test1.mvc;
 
 /**
  * Created by Vasiliy on 13.04.2015.

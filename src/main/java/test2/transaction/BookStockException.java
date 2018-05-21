@@ -1,4 +1,4 @@
-package com.xyz;
+package test2.transaction;
 
 public class BookStockException extends RuntimeException {
     /**

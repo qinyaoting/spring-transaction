@@ -87,6 +87,7 @@ public class TcpDataSource extends AbstractDataSource {
                 while (true) {
                     try {
                         Socket clientSocket = serverSocket.accept();
+                        // 会创建大量的ReceiveThread线程
                         new ReceiveThread(clientSocket, tcpDataSource).start();
                     } catch (SocketTimeoutException e) {
                         if (!tcpDataSource.isRunning()) {
@@ -120,7 +121,7 @@ public class TcpDataSource extends AbstractDataSource {
                     InputStream in = socket.getInputStream();
             ) {
                 byte[] buf = new byte[128];
-                while (true) {
+                while (true) {      //不停的循环, 只有出现异常才跳出循环
                     try {
                         int count = in.read(buf);
                         if (count < 0) {

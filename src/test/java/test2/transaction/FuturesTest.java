@@ -1,4 +1,4 @@
-package com.xyz;
+package test2.transaction;
 
 import com.google.common.util.concurrent.*;
 import org.junit.Test;

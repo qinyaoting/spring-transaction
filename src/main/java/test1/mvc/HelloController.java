@@ -1,4 +1,4 @@
-package org.pavlov.springapp.mvc.javascriptex1.controller;
+package test1.mvc;
 
 
 import org.springframework.beans.factory.annotation.Autowired;

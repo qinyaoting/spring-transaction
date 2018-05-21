@@ -1,12 +1,10 @@
-package org.pavlov.springapp.mvc.javascriptex1.repository.jdbcrepository;
+package test1.mvc;
 
-import org.pavlov.springapp.mvc.javascriptex1.repository.EnergyMeterRepository;
-import org.pavlov.springapp.mvc.javascriptex1.model.EnergyMeter;
+import test1.mvc.EnergyMeterRepository;
+import test1.mvc.EnergyMeter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.stereotype.Repository;
-
-import javax.sql.DataSource;
 
 /**
  * Created by Vasiliy on 13.04.2015.

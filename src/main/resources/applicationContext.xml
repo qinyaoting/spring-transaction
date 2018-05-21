@@ -43,7 +43,7 @@
         <!--<property name="maxTotal" value="10"/>-->
     </bean>
 
-    <!--<bean class="org.pavlov.springapp.mvc.javascriptex1.repository.jdbcrepository.JdbcEnergyMeterRepository" id="jdbcEnergyMeterDao">-->
+    <!--<bean class="test1.mvc.JdbcEnergyMeterRepository" id="jdbcEnergyMeterDao">-->
     <!--<constructor-arg ref="datasource"/>-->
     <!--</bean>-->
 
@@ -51,9 +51,9 @@
         <property name="dataSource" ref="datasource"/>
     </bean>
 
-    <bean id = "bookShopDao" class="com.xyz.BookShopDaoImpl" />
-    <bean id = "bookShopService" class="com.xyz.BookShopServiceImpl" />
-    <bean id = "cashier" class="com.xyz.CashierImpl" />
+    <bean id = "bookShopDao" class="test2.transaction.BookShopDaoImpl" />
+    <bean id = "bookShopService" class="test2.transaction.BookShopServiceImpl" />
+    <bean id = "cashier" class="test2.transaction.CashierImpl" />
 
 
 
