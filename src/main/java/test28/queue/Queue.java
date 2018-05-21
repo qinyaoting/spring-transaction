@@ -1,5 +1,7 @@
 package test28.queue;
 
+import org.apache.commons.lang.ArrayUtils;
+
 import java.io.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -20,7 +22,7 @@ public class Queue {
 
 
     public Queue() {
-        start();
+        //start();
     }
 
     /**
@@ -41,8 +43,8 @@ public class Queue {
             while(true) {
                 try {
                     String[] comm = queue.take();
-                    System.out.println(comm.toString());
-                    //Thread.sleep(3000);
+                    System.out.printf("%s \n",comm);
+                    Thread.sleep(3000);
                 } catch (InterruptedException e) {
                     System.out.println("genScriptFileAndExec:" + e.getMessage());
                 }
