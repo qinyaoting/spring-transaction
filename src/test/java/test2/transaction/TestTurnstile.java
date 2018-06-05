@@ -1,6 +1,6 @@
 package test2.transaction;
 
-import junit.framework.TestCase;
+import junit.framework.*;
 import test55.singleton.Turnstile;
 
 /**
@@ -11,9 +11,9 @@ import test55.singleton.Turnstile;
  * To change this template use File | Settings | File Templates.
  * Description:
  */
-public class TurnstileTest extends TestCase {
+public class TestTurnstile extends TestCase {
 
-    public TurnstileTest(String name) {
+    public TestTurnstile(String name) {
         super(name);
     }
 
@@ -28,15 +28,21 @@ public class TurnstileTest extends TestCase {
         assert(!t.alarm());
     }
 
+    /**
+     * 投入硬币, 是否没锁,没警报
+     */
     public void testCoin(){
         Turnstile t = new Turnstile();
         t.coin();
         Turnstile t1 = new Turnstile();
         assert(!t1.locked());
         assert (!t1.alarm());
-        assertEquals(1,t1.coins());
+        assertEquals(1, t1.coins());
     }
 
+    /**
+     * 投入硬币,通过转门,是否锁住,没有警报
+     */
     public void testCoinAndPass() {
         Turnstile t = new Turnstile();
         t.coin();
@@ -53,18 +59,19 @@ public class TurnstileTest extends TestCase {
         t.coin();
         t.coin();
         Turnstile t1 = new Turnstile();
-//        assert("unlocked", !t1.locked());
+        assert(!t1.locked());
         assertEquals("coins",1, t1.coins());
         assertEquals("refunds",1, t1.coins());
         assert(!t1.alarm());
     }
 
+    /*不投币, 转门在锁毕状态, 警报响起*/
     public void testPass(){
         Turnstile t = new Turnstile();
         t.pass();
         Turnstile t1 = new Turnstile();
-//        assert("alarm", t1.alarm());
-//        assert ("locked", t1.locked());
+        assert(t1.alarm());
+        assert (t1.locked());
     }
 
     public void testCancelAlarm(){
@@ -72,8 +79,8 @@ public class TurnstileTest extends TestCase {
         t.pass();
         t.coin();
         Turnstile t1 = new Turnstile();
-//        assert("alarm", t1.alarm());
-//        assert ("locked", t1.locked());
+        assert(t1.alarm());
+        assert (t1.locked());
         assertEquals("coin", 1, t1.coins());
         assertEquals("refund", 0, t1.refunds());
     }
@@ -83,11 +90,10 @@ public class TurnstileTest extends TestCase {
         t.coin();
         t.pass();
         t.coin();
-//        assert("alarm", t1.alarm());
-//        assert ("locked", t1.locked());
-        assertEquals("coin", 1, t.coins());
+        assert (!t.locked());
+        assertEquals("coin", 2, t.coins());
         t.pass();
-//        assert("locked", t.locked());
+        assert(t.locked());
     }
 
 }
