@@ -1,7 +1,7 @@
 package test2.transaction;
 
 import junit.framework.*;
-import test55.singleton.Turnstile;
+import test55.monstate.Turnstile;
 
 /**
  * Created with IntelliJ IDEA.

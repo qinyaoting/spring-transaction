@@ -1,4 +1,4 @@
-package test55.singleton;
+package test55.monstate;
 
 /**
  * Created with IntelliJ IDEA.
