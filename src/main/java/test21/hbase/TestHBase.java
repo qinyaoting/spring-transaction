@@ -27,7 +27,7 @@ public class TestHBase {
 
     static {
         Configuration conf = HBaseConfiguration.create();
-        conf.set("hbase.zookeeper.quorum","bdas00,bdas01,bdas02");
+        conf.set("hbase.zookeeper.quorum","10.4.108.190:2181");
 
         try {
             connect = ConnectionFactory.createConnection(conf);
@@ -234,9 +234,11 @@ public class TestHBase {
 
         try {
             /* create table. */
-            String tableName = "blog2";
+            /*String tableName = "blog2";
             String[] family = {"article", "author"};
-            createTable(tableName, family);
+            createTable(tableName, family);*/
+
+            getResultScan("t_user");
 
             /* put data. */
            /* String[] column1 = {"title", "content", "tag"};

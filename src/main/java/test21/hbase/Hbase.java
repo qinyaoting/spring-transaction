@@ -27,7 +27,7 @@ public class Hbase {
 
     static {
         conf = HBaseConfiguration.create();
-        conf.set("hbase.zookeeper.quorum", "bdas00,bdas01,bdas02");
+        conf.set("hbase.zookeeper.quorum", "10.4.108.190:2181");
     }    /*     * 创建表     *      * @tableName 表名     *      * @family 列族列表     */
 
     public static void creatTable(String tableName, String[] family)
