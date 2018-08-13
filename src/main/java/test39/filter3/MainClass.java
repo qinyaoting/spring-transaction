@@ -23,24 +23,9 @@ public class MainClass {
         chain.addFilter(new HtmlFilter()).addFilter(new SensitiveFilter());
 
         //实例化处理类,把过滤器链传给MsgProcessor
-        MsgProcessor mp = new MsgProcessor(msg,chain);
+        MsgProcessor mp = new MsgProcessor(msg, chain);
         String r = mp.process();
 
         System.out.println(r);
-
-
-
-        /*final File sourceFile = new File("/home/chin/company/conf/os/CentOS-6.6-x86_64-bin-DVD1.iso");
-        final File targetFile = new File("/home/chin/company/conf/os/CentOS-6.6-x86_64-bin-DVD1====.iso");
-        try
-        {
-            System.out.println(new Date());
-            Files.copy(sourceFile, targetFile);
-            System.out.println(new Date());
-        }
-        catch (IOException fileIoEx)
-        {
-            System.out.println("ERROR trying to copy file '"+fileIoEx.toString());
-        }*/
     }
 }

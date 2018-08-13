@@ -13,7 +13,7 @@ public class MsgProcessor {
 
     public String process(){
         String r = msg;
-        for(Filter f : filters){
+        for(Filter f : filters){    // 遍历集合, 调用每个过滤器的过滤方法
             r = f.doFilter(r);
         }
         return r;
